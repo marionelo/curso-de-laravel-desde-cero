@@ -16,9 +16,8 @@
         "barryvdh/laravel-debugbar": "^3.4",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~1.0",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.0"
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~9.5"
     },
     "autoload": {
         "psr-4": {
@@ -53,8 +52,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    }
 }
