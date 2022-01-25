@@ -123,3 +123,40 @@ Tambien se pueden hacer metodos para hacer queries con llamada statica
     // la forma en la que se hace la llamada
     User::findbyEmail('email@aqui.com')
 ```
+
+Pruebas unitarias con DB
+-----
+
+Para las pruebas unitarias con base de datos debemos tener en consideracion 2 cosas
+
+* La primera es que se usan 2 bases de datos
+    * Para que este cambio se pueda hacer correctamente se modifica el archivo de phpunit.xml el donde dice DB_DATABASE
+
+```xml
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="DB_DATABASE" value="curso_styde_tests"/>
+    </php>
+```
+
+ahora internamento dentro delos tests `UsersModuleTest.php` se hace uso de un trait llamado
+`RefreshDatabase` el cual se encarga de recrear la base de datos
+cada vez y al mismo tiempo de llenarla si es necesario
+
+```php
+<?php
+
+namespace Tests\Feature;
+
+use App\User;
+use Illuminate\Support\Facades\DB;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class UsersModuleTest extends TestCase
+{
+    use RefreshDatabase;
+```
